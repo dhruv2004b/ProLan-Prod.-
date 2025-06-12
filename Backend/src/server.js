@@ -12,7 +12,7 @@ import { connectDB } from "./lib/db.js";
 
 const app = express();
 const PORT = process.env.PORT;
-const FE_URL = process.env.FRONTEND_URL || "http://localhost:5173";
+const FE_URL = process.env.FRONTEND_URL;
 
 const __dirname = path.resolve();
 
@@ -33,7 +33,7 @@ app.use("/api/chat", chatRoutes);
 if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../frontend/dist")));
 
-  app.get("/*", (req, res) => {
+  app.get("*", (req, res) => {
     res.sendFile(path.join(__dirname, "../frontend", "dist", "index.html"));
   });
 }
